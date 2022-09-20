@@ -1,10 +1,17 @@
 {
-  "name": "@zmzhoi/react-app-template",
+  "name": "react-app",
   "private": "true",
-  "version": "1.0.0",
   "description": "",
-  "scripts": {},
+  "scripts": {
+    "format": "prettier --check \"**/*.(js|jsx|ts|tsx|json|md)\"",
+    "format:fix": "prettier --write \"**/*.(js|jsx|ts|tsx|json|md)\"",
+    "lint": "eslint src --ext .js,.jsx,.ts,.tsx"
+  },
   "devDependencies": {
+    "@zmzhoi/babel-preset-react": "1.0.0",
+    "@zmzhoi/eslint-config-react": "3.0.2",
+    "eslint": "^8.23.1",
+    "prettier": "^2.7.1",
     "webpack": "^5.74.0",
     "webpack-cli": "^4.10.0",
     "webpack-dev-server": "^4.11.1"
