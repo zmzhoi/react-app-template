@@ -23,10 +23,8 @@ try {
   compiler = webpack(webpackConfig);
   log.info(`Configured successfully! ✅`);
 } catch (error) {
-  if (error) {
-    log.info(`(❗️) Failed to configure. (❗️)`);
-    log.error(error.message ? error.message : error);
-  }
+  log.info(`(❗️) Failed to configure. (❗️)`);
+  log.error(error.message ? error.message : error);
   process.exit(1);
 }
 

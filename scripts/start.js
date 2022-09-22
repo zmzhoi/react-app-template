@@ -17,12 +17,22 @@ const { log } = require('./utils');
  *                     Start script
  * ==================================================
  */
-const webpackConfig = createWebpackConfig(process.env.NODE_ENV);
-const webpackDevServerConfig = createWebpackDevServerConfig();
 
-log.info(`Configuring...(1/2)`);
-const compiler = webpack(webpackConfig);
-const server = new webpackDevServer(webpackDevServerConfig, compiler);
+let webpackConfig;
+let webpackDevServerConfig;
+let compiler;
+let server;
+try {
+  log.info(`Configuring...(1/2)`);
+  webpackConfig = createWebpackConfig(process.env.NODE_ENV);
+  webpackDevServerConfig = createWebpackDevServerConfig();
+  compiler = webpack(webpackConfig);
+  server = new webpackDevServer(webpackDevServerConfig, compiler);
+} catch (error) {
+  log.info(`(❗️) Failed to configure. (❗️)`);
+  log.error(error.message ? error.message : error);
+  process.exit(1);
+}
 log.info(`Configured successfully! ✅`);
 
 log.info(`\nStarting the server...(2/2)`);
