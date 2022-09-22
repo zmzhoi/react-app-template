@@ -26,10 +26,16 @@ module.exports = function (env) {
     devtool: false,
     module: {
       rules: [
+        // Apply babel-loader
         {
           test: /\.(js|jsx|ts|tsx)$/,
           include: paths.src,
-          loader: require.resolve('babel-loader'),
+          loader: 'babel-loader',
+        },
+        {
+          // Apply style-loader + css-loader
+          test: /\.css$/,
+          use: ['style-loader', 'css-loader'],
         },
       ],
     },
