@@ -6,20 +6,20 @@
 
 ## Tech Stack ☑️
 
-<img src="https://img.shields.io/badge/React-v18-brightgreen?style=flat&logo=react&logoColor=61DAFB"/>
+<img src="https://img.shields.io/badge/React-v18-brightgreen?style=flat-square&logo=react&logoColor=61DAFB"/>
 
-<img src="https://img.shields.io/badge/Webpack-v5-brightgreen?style=flat&logo=Webpack&logoColor=61DAFB"/>
+<img src="https://img.shields.io/badge/Webpack-v5-brightgreen?style=flat-square&logo=Webpack&logoColor=61DAFB"/>
 
-<img src="https://img.shields.io/badge/WebpackDevServer-v4-brightgreen?style=flat&logo=Webpack&logoColor=61DAFB"/>
+<img src="https://img.shields.io/badge/WebpackDevServer-v4-brightgreen?style=flat-square&logo=Webpack&logoColor=61DAFB"/>
 
-<img src="https://img.shields.io/badge/Babel-v7-brightgreen?style=flat&logo=babel&logoColor=yellow"/>
+<img src="https://img.shields.io/badge/Babel-v7-brightgreen?style=flat-square&logo=babel&logoColor=yellow"/>
 
-<img src="https://img.shields.io/badge/Eslint-v8-brightgreen?style=flat&logo=eslint&logoColor=blueviolet"/>
+<img src="https://img.shields.io/badge/Eslint-v8-brightgreen?style=flat-square&logo=eslint&logoColor=blueviolet"/>
 
 ## How to start ☑️
 
 ```sh
-git clone https://github.com/zmzhoi my-project
+git clone https://github.com/zmzhoi/tiny-react-app-template.git example
 cd my-project
 npm install
 npm start
