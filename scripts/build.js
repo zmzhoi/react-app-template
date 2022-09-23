@@ -8,39 +8,39 @@ require('./env')('production');
 const webpack = require('webpack');
 
 const createWebpackConfig = require('./configs/webpack.config');
-const { log } = require('./utils');
 
 /**
  * ==================================================
  *                     Build script
  * ==================================================
  */
-const webpackConfig = createWebpackConfig(process.env.NODE_ENV);
 
 let compiler;
+let webpackConfig;
+const logger = console;
 try {
-  log.info(`Configuring...(1/2)`);
+  logger.log(`Configuring...(1/2)`);
+  webpackConfig = createWebpackConfig(process.env.NODE_ENV);
   compiler = webpack(webpackConfig);
-  log.info(`Configured successfully! ✅`);
 } catch (error) {
-  log.info(`(❗️) Failed to configure. (❗️)`);
-  log.error(error.message ? error.message : error);
+  logger.log(`(❗️) Failed to configure. (❗️)`);
+  logger.error(error.message ? error.message : error);
   process.exit(1);
 }
+logger.log(`Configured successfully! ✅`);
 
-log.info(`\nCompiling...(2/2)`);
-
+logger.log(`\nCompiling...(2/2)`);
 compiler.run((error, stats) => {
   const statsError = stats && typeof stats.hasErrors === 'function' && stats.hasErrors();
   const statsWarning = stats && typeof stats.hasWarnings === 'function' && stats.hasWarnings();
 
   if (error || statsError || statsWarning) {
-    log.info('(❗️) Failed to compile. (❗️)\n');
+    logger.log('(❗️) Failed to compile. (❗️)\n');
 
     if (error) {
-      log.error(error.stack || error);
+      logger.error(error.stack || error);
       if (error.details) {
-        log.error(error.details);
+        logger.error(error.details);
       }
     }
 
@@ -48,16 +48,16 @@ compiler.run((error, stats) => {
 
     if (statsError) {
       info.errors.forEach((error) => {
-        log.error(error.message);
+        logger.error(error.message);
       });
     }
 
     if (statsWarning) {
       info.warnings.forEach((warning) => {
-        log.warn(warning.message);
+        logger.warn(warning.message);
       });
     }
   } else {
-    log.info(`Compiled successfully! ✅`);
+    logger.log(`Compiled successfully! ✅`);
   }
 });

@@ -18,20 +18,7 @@ function toSpecifiedHost(host) {
   return host;
 }
 
-const log = {
-  info: function (...args) {
-    console.log(...args);
-  },
-  warn: function (...args) {
-    console.warn(...args);
-  },
-  error: function (...args) {
-    console.error(...args);
-  },
-};
-
 module.exports = {
   fixPublicUrl,
   toSpecifiedHost,
-  log,
 };

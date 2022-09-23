@@ -22,29 +22,30 @@ let webpackConfig;
 let webpackDevServerConfig;
 let compiler;
 let server;
+const logger = console;
 try {
-  log.info(`Configuring...(1/2)`);
+  logger.log(`Configuring...(1/2)`);
   webpackConfig = createWebpackConfig(process.env.NODE_ENV);
   webpackDevServerConfig = createWebpackDevServerConfig();
   compiler = webpack(webpackConfig);
   server = new webpackDevServer(webpackDevServerConfig, compiler);
 } catch (error) {
-  log.info(`(❗️) Failed to configure. (❗️)`);
-  log.error(error.message ? error.message : error);
+  logger.log(`(❗️) Failed to configure. (❗️)`);
+  logger.error(error.message ? error.message : error);
   process.exit(1);
 }
-log.info(`Configured successfully! ✅`);
+logger.log(`Configured successfully! ✅`);
 
-log.info(`\nStarting the server...(2/2)`);
+logger.log(`\nStarting the server...(2/2)`);
 server.startCallback((error) => {
   if (error) {
-    log.info(`(❗️) Failed to start the development server. (❗️)`);
-    log.error(error);
+    logger.log(`(❗️) Failed to start the development server. (❗️)`);
+    logger.error(error);
     return;
   }
 
   const { host, port } = webpackDevServerConfig;
 
-  log.info('The server is started successfully! ✅');
-  log.info(`\n✨ The server is listening on http://${host}:${port} ✨\n`);
+  logger.log('The server is started successfully! ✅');
+  logger.log(`\n✨ The server is listening on http://${host}:${port} ✨\n`);
 });
