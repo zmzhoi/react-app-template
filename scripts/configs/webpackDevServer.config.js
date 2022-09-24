@@ -16,7 +16,7 @@ module.exports = function ({ proxy } = {}) {
     allowedHosts: 'auto', // 👀
     bonjour: false, // 👀
     historyApiFallback: true, // SPA는 CSR을 위해 HTML5 History API를 사용하기 때문에 개발 서버는 없는 경로를 요청받아도 index.html을 응답하게 처리해줘야한다. 이 옵션을 활성화하면 없는 url 요청이 들어와도 원래처럼 404를 응답하지 않고 index.html을 응답한다.
-    hot: true, // HMR(Hot-Module-Replacement)
+    hot: true, // HMR(Hot-Module-Replacement) v4부터 기본 활성화
     liveReload: false,
     open,
     host: toSpecifiedHost(host),

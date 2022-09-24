@@ -10,7 +10,6 @@ const webpackDevServer = require('webpack-dev-server');
 
 const createWebpackConfig = require('./configs/webpack.config');
 const createWebpackDevServerConfig = require('./configs/webpackDevServer.config');
-const { log } = require('./utils');
 
 /**
  * ==================================================
