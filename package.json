@@ -10,6 +10,7 @@
     "build": "node scripts/build.js"
   },
   "devDependencies": {
+    "@svgr/webpack": "^6.3.1",
     "@zmzhoi/babel-preset-react": "1.0.0",
     "@zmzhoi/eslint-config-react": "3.0.2",
     "babel-loader": "^8.2.5",

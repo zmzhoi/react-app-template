@@ -12,8 +12,9 @@ const paths = require('./paths');
 const moduleID = Symbol();
 
 module.exports = function (env) {
-  const extensions = ['.js', '.jsx', '.ts', '.tsx'];
   const isProduction = env === 'production';
+  const extensions = ['.js', '.jsx', '.ts', '.tsx'];
+  const assetInlineSizeLimit = 10 * 1024; // 10KB
 
   const webpackConfig = {
     mode: env,
@@ -24,6 +25,7 @@ module.exports = function (env) {
       path: paths.output,
       publicPath: fixPublicUrl(process.env.PUBLIC_URL),
       filename: 'js/bundle.js', // = output.path + output.filename
+      assetModuleFilename: 'asset/[name][ext]',
     },
     resolve: {
       extensions,
@@ -31,27 +33,48 @@ module.exports = function (env) {
     devtool: false,
     module: {
       rules: [
-        // Babel-Loader
         {
-          [moduleID]: 'BABEL_RULE',
-          test: /\.(js|jsx|ts|tsx)$/,
-          include: paths.src,
-          loader: 'babel-loader',
-        },
-        {
-          // Style-Loader + Css-Loader + PostCss-Loader
-          [moduleID]: 'CSS_RULE',
-          test: /\.css$/,
-          use: [
-            'style-loader',
-            'css-loader',
+          oneOf: [
+            // Asset Module
             {
-              loader: 'postcss-loader',
-              options: {
-                postcssOptions: {
-                  plugins: [PostCssPresetEnv()],
+              [moduleID]: 'ASSET_RULE',
+              test: [/\.bmp$/, /\.gif$/, /\.jpe?g/, /\.png$/],
+              type: 'asset',
+              parser: {
+                dataUrlCondition: {
+                  maxSize: assetInlineSizeLimit,
                 },
               },
+            },
+            // SVG
+            {
+              [moduleID]: 'SVG_RULE',
+              test: /\.svg$/,
+              use: ['@svgr/webpack'],
+            },
+            // Babel-Loader
+            {
+              [moduleID]: 'BABEL_RULE',
+              test: /\.(js|jsx|ts|tsx)$/,
+              include: paths.src,
+              loader: 'babel-loader',
+            },
+            {
+              // Style-Loader + Css-Loader + PostCss-Loader
+              [moduleID]: 'CSS_RULE',
+              test: /\.css$/,
+              use: [
+                'style-loader',
+                'css-loader',
+                {
+                  loader: 'postcss-loader',
+                  options: {
+                    postcssOptions: {
+                      plugins: [PostCssPresetEnv()],
+                    },
+                  },
+                },
+              ],
             },
           ],
         },
@@ -73,6 +96,8 @@ module.exports = function (env) {
   };
 
   if (isProduction) {
+    const webpackModuleRules = webpackConfig.module.rules[0].oneOf;
+
     /** Set Optimization. **/
     webpackConfig.optimization = {
       minimize: true,
@@ -82,11 +107,14 @@ module.exports = function (env) {
     /** Change name of bundle file. **/
     webpackConfig.output.filename = 'js/[name].[contenthash:8].js';
 
+    /** Change name of asset files. **/
+    webpackConfig.output.assetModuleFilename = 'asset/[hash][ext][query]';
+
     /** Change handling css. **/
     /* (+) MiniCssExtractPlugin
      * Output path: /build/css/[name].[contenthash:8].css
      */
-    const cssRule = webpackConfig.module.rules.find((rule) => rule[moduleID] === 'CSS_RULE');
+    const cssRule = webpackModuleRules.find((rule) => rule[moduleID] === 'CSS_RULE');
     cssRule.use = [
       MiniCssExtractPlugin.loader, // To use MiniCssExtractPlugin, style-loader is removed.
       'css-loader',
