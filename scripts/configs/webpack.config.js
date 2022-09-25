@@ -91,7 +91,6 @@ module.exports = function (env) {
         cache: true,
         cacheLocation: path.resolve(paths.nodeModules, '.cache/.eslintcache'),
       }),
-      PostCssPresetEnv,
     ],
   };
 
