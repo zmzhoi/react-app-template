@@ -1,7 +1,7 @@
 const path = require('path');
 
 const paths = require('./paths');
-const { fixPublicUrl, toSpecifiedHost } = require('../utils');
+const { toSpecifiedHost } = require('../utils');
 
 /**
  * Reference: https://webpack.kr/configuration/dev-server/#root
@@ -26,7 +26,7 @@ module.exports = function ({ proxy } = {}) {
     static: {
       // ✨ 정적 파일 제공 옵션
       directory: path.resolve(paths.root, 'public'),
-      publicPath: fixPublicUrl(process.env.PUBLIC_URL),
+      publicPath: process.env.PUBLIC_URL,
       watch: true, // 지정된 directory 감시. 변경시 페이지 reload.
     },
     webSocketServer: 'ws', // 👀

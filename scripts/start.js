@@ -3,7 +3,7 @@
  *                     Requires
  * ==================================================
  */
-require('./env')('development');
+require('./env').init('development');
 
 const webpack = require('webpack');
 const webpackDevServer = require('webpack-dev-server');

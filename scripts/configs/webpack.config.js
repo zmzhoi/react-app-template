@@ -1,15 +1,17 @@
 const path = require('path');
 
+const Webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const PostCssPresetEnv = require('postcss-preset-env');
 
-const { fixPublicUrl } = require('../utils');
 const paths = require('./paths');
+const { createClientEnv } = require('../env');
 
 const moduleID = Symbol();
+const clientEnv = createClientEnv();
 
 module.exports = function (env) {
   const isProduction = env === 'production';
@@ -23,7 +25,7 @@ module.exports = function (env) {
     },
     output: {
       path: paths.output,
-      publicPath: fixPublicUrl(process.env.PUBLIC_URL),
+      publicPath: process.env.PUBLIC_URL,
       filename: 'js/bundle.js', // = output.path + output.filename
       assetModuleFilename: 'asset/[name][ext]',
     },
@@ -90,6 +92,9 @@ module.exports = function (env) {
         failOnWarning: true,
         cache: true,
         cacheLocation: path.resolve(paths.nodeModules, '.cache/.eslintcache'),
+      }),
+      new Webpack.DefinePlugin({
+        'process.env': JSON.stringify(clientEnv),
       }),
     ],
   };

@@ -104,3 +104,9 @@ import 'core-js'; // on the top
 
 > `browserslist`에 대한 자세한 내용은
 > <a href="https://github.com/browserslist/browserslist#readme" target="_blank">여기</a>를 참조해주세요.
+
+## Environments
+환경 변수 설정 우선순위는 아래와 같습니다.
+1. cli
+2. dotenv file
+3. script file

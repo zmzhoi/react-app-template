@@ -3,7 +3,7 @@
  *                     Requires
  * ==================================================
  */
-require('./env')('production');
+require('./env').init('production');
 
 const webpack = require('webpack');
 
