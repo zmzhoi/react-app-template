@@ -46,5 +46,9 @@ server.startCallback((error) => {
   const { host, port } = webpackDevServerConfig;
 
   logger.log('The server is started successfully! ✅');
-  logger.log(`\n✨ The server is listening on http://${host}:${port} ✨\n`);
+  logger.log(
+    `\n✨ The server is listening on http://${host}:${port}${
+      process.env.PUBLIC_URL && process.env.PUBLIC_URL
+    } ✨\n`,
+  );
 });

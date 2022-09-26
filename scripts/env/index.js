@@ -32,7 +32,7 @@ function setRutimeEnvironment(scriptEnv) {
     process.env.NODE_ENV || dotenvConfig.parsed.NODE_ENV || scriptEnv || 'development';
   process.env.BABEL_ENV =
     process.env.BABEL_ENV || dotenvConfig.parsed.BABEL_ENV || scriptEnv || 'development';
-  process.env.PUBLIC_URL = process.env.PUBLIC_URL || dotenvConfig.parsed.PUBLIC_URL || '/';
+  process.env.PUBLIC_URL = process.env.PUBLIC_URL || dotenvConfig.parsed.PUBLIC_URL || '';
 }
 
 module.exports.init = function (scriptEnv) {

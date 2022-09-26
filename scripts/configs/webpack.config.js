@@ -25,9 +25,13 @@ module.exports = function (env) {
     },
     output: {
       path: paths.output,
-      publicPath: process.env.PUBLIC_URL,
       filename: 'js/bundle.js', // = output.path + output.filename
       assetModuleFilename: 'asset/[name][ext]',
+      ...(process.env.PUBLIC_URL && {
+        publicPath: process.env.PUBLIC_URL.endsWith('/')
+          ? process.env.PUBLIC_URL
+          : process.env.PUBLIC_URL + '/',
+      }),
     },
     resolve: {
       extensions,
