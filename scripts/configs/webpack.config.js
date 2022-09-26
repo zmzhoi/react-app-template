@@ -38,7 +38,7 @@ module.exports = function (env) {
     resolve: {
       extensions,
     },
-    devtool: false,
+    devtool: isProduction ? false : 'eval-source-map',
     module: {
       rules: [
         {
@@ -54,7 +54,7 @@ module.exports = function (env) {
                 },
               },
             },
-            // SVG
+            // Svg-Loader
             {
               [moduleID]: 'SVG_RULE',
               test: /\.svg$/,
