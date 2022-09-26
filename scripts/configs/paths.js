@@ -10,7 +10,7 @@ module.exports = {
   root: rootPath,
   nodeModules: resolvePath('node_modules'),
   src: resolvePath('src'),
-  entry: resolvePath('src/index.jsx'),
+  entry: resolvePath('src/index.tsx'),
   output: resolvePath('build'),
   htmlTemplate: resolvePath('public/index.html'),
   webpackConfigFile: resolvePath('webpack.config.js'),

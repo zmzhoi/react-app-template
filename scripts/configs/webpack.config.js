@@ -7,6 +7,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const PostCssPresetEnv = require('postcss-preset-env');
 const PostcssNormalize = require('postcss-normalize');
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 
 const paths = require('./paths');
 const { createClientEnv } = require('../env');
@@ -100,6 +101,9 @@ module.exports = function (env) {
       }),
       new Webpack.DefinePlugin({
         'process.env': JSON.stringify(clientEnv),
+      }),
+      new ForkTsCheckerWebpackPlugin({
+        async: !isProduction, // if true, reports issues after webpack build.
       }),
     ],
   };
