@@ -4,14 +4,14 @@ const fs = require('fs');
 
 let dotenvConfig;
 
-function setRutimeEnvironment(scriptEnv) {
-  // Set env from dotenv file.
+function setBuildEnvironment(scriptEnv) {
+  // Overwrite environment variables with dotenv file and get it.
   let dotenvFile;
-  const dotenvFileRexList = [`.env.${process.env.NODE_ENV}`, `.env`];
+  const dotenvFiles = [`.env.${process.env.NODE_ENV}`, `.env`];
 
-  dotenvFileRexList.some((_dotenvFile) => {
-    if (fs.existsSync(_dotenvFile)) {
-      dotenvFile = _dotenvFile;
+  dotenvFiles.some((file) => {
+    if (fs.existsSync(file)) {
+      dotenvFile = file;
       return true;
     }
     return false;
@@ -22,11 +22,11 @@ function setRutimeEnvironment(scriptEnv) {
   }
 
   /**
-   * Set environment variables
-   * (Environment variables priority)
-   * 1) from cli
-   * 2) from dotenv file
-   * 3) argument of this function (injected from start.js, build.js)
+   * Re-overwrite only major environment variables.
+   * [Priority]
+   * 1) From cli (e.g. NODE_ENV=development node scripts/start.js)
+   * 2) From dotenv file
+   * 3) Argument of this function (injected from start.js, build.js)
    */
   process.env.NODE_ENV =
     process.env.NODE_ENV || dotenvConfig.parsed.NODE_ENV || scriptEnv || 'development';
@@ -36,22 +36,23 @@ function setRutimeEnvironment(scriptEnv) {
 }
 
 module.exports.init = function (scriptEnv) {
-  // set runtime env.
-  setRutimeEnvironment(scriptEnv);
+  // Set env that is needed for build.
+  setBuildEnvironment(scriptEnv);
 };
 
 module.exports.createClientEnv = function () {
-  const defaultClientEnv = {
+  let clientEnv;
+
+  // Set client environment variables with dotenv file if it exists.
+  if (dotenvConfig && dotenvConfig.parsed) {
+    clientEnv = dotenvConfig.parsed;
+  }
+
+  // Overwrite only major environment variables.
+  Object.assign(clientEnv, {
     NODE_ENV: process.env.NODE_ENV,
     PUBLIC_URL: process.env.PUBLIC_URL,
-  };
+  });
 
-  let clientEnv;
-  if (dotenvConfig && dotenvConfig.parsed) {
-    clientEnv = {
-      ...dotenvConfig.parsed,
-      ...defaultClientEnv,
-    };
-  }
   return clientEnv;
 };
