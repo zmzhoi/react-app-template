@@ -6,6 +6,7 @@ const ESLintPlugin = require('eslint-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const PostCssPresetEnv = require('postcss-preset-env');
+const PostcssNormalize = require('postcss-normalize');
 
 const paths = require('./paths');
 const { createClientEnv } = require('../env');
@@ -76,7 +77,7 @@ module.exports = function (env) {
                   loader: 'postcss-loader',
                   options: {
                     postcssOptions: {
-                      plugins: [PostCssPresetEnv()],
+                      plugins: [PostCssPresetEnv(), PostcssNormalize()],
                     },
                   },
                 },
@@ -130,7 +131,7 @@ module.exports = function (env) {
         loader: 'postcss-loader',
         options: {
           postcssOptions: {
-            plugins: [PostCssPresetEnv()],
+            plugins: [PostCssPresetEnv(), PostcssNormalize()],
           },
         },
       },
