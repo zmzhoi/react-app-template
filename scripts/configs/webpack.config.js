@@ -12,7 +12,6 @@ const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 
 const paths = require('./paths');
 const { createClientEnv } = require('../env');
-const { resolvePath } = require('./paths');
 
 const moduleID = Symbol();
 const clientEnv = createClientEnv();
@@ -41,7 +40,7 @@ module.exports = function (env) {
       extensions,
       plugins: [
         new TsconfigPathsPlugin({
-          configFile: resolvePath('tsconfig.json'),
+          configFile: paths.tsConfigFile,
         }),
       ],
     },

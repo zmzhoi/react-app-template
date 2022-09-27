@@ -13,6 +13,6 @@ module.exports = {
   entry: resolvePath('src/index.tsx'),
   output: resolvePath('build'),
   htmlTemplate: resolvePath('public/index.html'),
-  webpackConfigFile: resolvePath('webpack.config.js'),
-  resolvePath,
+  webpackConfigFile: resolvePath('scripts/configs/webpack.config.js'),
+  tsConfigFile: resolvePath('tsconfig.json'),
 };
