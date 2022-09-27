@@ -23,7 +23,7 @@ let compiler;
 let server;
 const logger = console;
 try {
-  logger.log(`Configuring...(1/2)`);
+  logger.log(`Configuring...`);
   webpackConfig = createWebpackConfig(process.env.NODE_ENV);
   webpackDevServerConfig = createWebpackDevServerConfig();
   compiler = webpack(webpackConfig);
@@ -33,22 +33,15 @@ try {
   logger.error(error.message ? error.message : error);
   process.exit(1);
 }
+
 logger.log(`Configured successfully! ✅`);
 
-logger.log(`\nStarting the server...(2/2)`);
 server.startCallback((error) => {
   if (error) {
     logger.log(`(❗️) Failed to start the development server. (❗️)`);
     logger.error(error);
-    return;
+    process.exit(1);
   }
 
-  const { host, port } = webpackDevServerConfig;
-
-  logger.log('The server is started successfully! ✅');
-  logger.log(
-    `\n✨ The server is listening on http://${host}:${port}${
-      process.env.PUBLIC_URL && process.env.PUBLIC_URL
-    } ✨\n`,
-  );
+  logger.log(`\nStarting the server...`);
 });
