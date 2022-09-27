@@ -2,37 +2,34 @@
 
 const fs = require('fs');
 
-let dotenvConfig;
+let dotenvConfig = { parsed: {} };
 
 function setBuildEnvironment(scriptEnv) {
-  // Overwrite environment variables with dotenv file and get it.
-  let dotenvFile;
-  const dotenvFiles = [`.env.${process.env.NODE_ENV}`, `.env`];
-
-  dotenvFiles.some((file) => {
-    if (fs.existsSync(file)) {
-      dotenvFile = file;
+  // Get environment variables from dotenv file if it exists.
+  [`.env.${process.env.NODE_ENV}`, `.env`].some((dotenv) => {
+    if (fs.existsSync(dotenv)) {
+      dotenvConfig = require('dotenv').config({ path: dotenv });
       return true;
     }
     return false;
   });
 
-  if (dotenvFile) {
-    dotenvConfig = require('dotenv').config({ path: dotenvFile });
-  }
-
   /**
-   * Re-overwrite only major environment variables.
-   * [Priority]
+   * Re-write only major environment variables if there's no variable injected from cli.
+   * (Priority)
    * 1) From cli (e.g. NODE_ENV=development node scripts/start.js)
    * 2) From dotenv file
    * 3) Argument of this function (injected from start.js, build.js)
    */
-  process.env.NODE_ENV =
-    process.env.NODE_ENV || dotenvConfig.parsed.NODE_ENV || scriptEnv || 'development';
-  process.env.BABEL_ENV =
-    process.env.BABEL_ENV || dotenvConfig.parsed.BABEL_ENV || scriptEnv || 'development';
-  process.env.PUBLIC_URL = process.env.PUBLIC_URL || dotenvConfig.parsed.PUBLIC_URL || '';
+  if (!process.env.NODE_ENV) {
+    process.env.NODE_ENV = dotenvConfig.parsed.NODE_ENV || scriptEnv || 'development';
+  }
+  if (!process.env.BABEL_ENV) {
+    process.env.BABEL_ENV = dotenvConfig.parsed.BABEL_ENV || scriptEnv || 'development';
+  }
+  if (!process.env.PUBLIC_URL) {
+    process.env.PUBLIC_URL = dotenvConfig.parsed.PUBLIC_URL || '';
+  }
 }
 
 module.exports.init = function (scriptEnv) {
