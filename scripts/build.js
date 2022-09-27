@@ -1,3 +1,4 @@
+const startTime = new Date(); // 시작
 /**
  * ==================================================
  *                     Requires
@@ -31,6 +32,7 @@ logger.log(`Configured successfully! ✅`);
 
 logger.log(`\nCompiling...(2/2)`);
 compiler.run((error, stats) => {
+  const endTime = new Date(); // 종료
   const statsError = stats && typeof stats.hasErrors === 'function' && stats.hasErrors();
   const statsWarning = stats && typeof stats.hasWarnings === 'function' && stats.hasWarnings();
 
@@ -59,5 +61,6 @@ compiler.run((error, stats) => {
     }
   } else {
     logger.log(`Compiled successfully! ✅`);
+    logger.log(`in ${(endTime - startTime) / 1000} secs.`);
   }
 });
