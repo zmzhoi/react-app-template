@@ -1,4 +1,7 @@
+const paths = require('./paths');
+
 module.exports = {
+  rootDir: paths.root,
   testEnvironment: 'jsdom', // jsdom 환경 구축
   setupFilesAfterEnv: ['<rootDir>/scripts/configs/jestSetup.js'], // 테스트를 위한 추가 환경 설정(@testing-librart/jest-dom)
   testMatch: [

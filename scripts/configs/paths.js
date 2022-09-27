@@ -15,4 +15,5 @@ module.exports = {
   htmlTemplate: resolvePath('public/index.html'),
   webpackConfigFile: resolvePath('scripts/configs/webpack.config.js'),
   tsConfigFile: resolvePath('tsconfig.json'),
+  jestConfigFile: resolvePath('scripts/configs/jest.config.js'),
 };
