@@ -14,4 +14,5 @@ module.exports = {
   output: resolvePath('build'),
   htmlTemplate: resolvePath('public/index.html'),
   webpackConfigFile: resolvePath('webpack.config.js'),
+  resolvePath,
 };

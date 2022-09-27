@@ -8,9 +8,11 @@ const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const PostCssPresetEnv = require('postcss-preset-env');
 const PostcssNormalize = require('postcss-normalize');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 
 const paths = require('./paths');
 const { createClientEnv } = require('../env');
+const { resolvePath } = require('./paths');
 
 const moduleID = Symbol();
 const clientEnv = createClientEnv();
@@ -37,6 +39,11 @@ module.exports = function (env) {
     },
     resolve: {
       extensions,
+      plugins: [
+        new TsconfigPathsPlugin({
+          configFile: resolvePath('tsconfig.json'),
+        }),
+      ],
     },
     devtool: isProduction ? false : 'eval-source-map',
     module: {
