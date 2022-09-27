@@ -3,7 +3,3 @@ build
 .env
 .env.development
 .env.production
-
-
-# Remove below
-TODO.md
