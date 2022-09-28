@@ -9,6 +9,7 @@ const PostCssPresetEnv = require('postcss-preset-env');
 const PostcssNormalize = require('postcss-normalize');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 
 const paths = require('./paths');
 const { createClientEnv } = require('../env');
@@ -30,6 +31,7 @@ module.exports = function (env) {
       path: paths.output,
       filename: 'js/bundle.js', // = output.path + output.filename
       assetModuleFilename: 'asset/[name][ext]',
+      clean: true,
       ...(process.env.PUBLIC_URL && {
         publicPath: process.env.PUBLIC_URL.endsWith('/')
           ? process.env.PUBLIC_URL
@@ -72,6 +74,16 @@ module.exports = function (env) {
               test: /\.(js|jsx|ts|tsx)$/,
               include: paths.src,
               loader: 'babel-loader',
+              options: {
+                // Refresh webpack plugin enable only development mode
+                plugins: [!isProduction && require.resolve('react-refresh/babel')].filter(Boolean),
+
+                // The result of caching will be placed in ./node_modules/.cache/babel-loader/
+                // This help to be faster when rebuilding.
+                cacheDirectory: true,
+                cacheCompression: false,
+                compact: isProduction,
+              },
             },
             {
               // Style-Loader + Css-Loader + PostCss-Loader
@@ -108,10 +120,11 @@ module.exports = function (env) {
       new Webpack.DefinePlugin({
         'process.env': JSON.stringify(clientEnv),
       }),
+      !isProduction && new ReactRefreshWebpackPlugin({ overlay: false }), // Refresh webpack plugin enable only development mode
       new ForkTsCheckerWebpackPlugin({
         async: !isProduction, // if true, reports issues after webpack build.
       }),
-    ],
+    ].filter(Boolean),
   };
 
   if (isProduction) {
