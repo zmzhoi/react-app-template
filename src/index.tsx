@@ -1,4 +1,4 @@
-import './libs/initializer';
+import '@/libs/initializer';
 import * as ReactDOM from 'react-dom/client';
 
 import App from './App';

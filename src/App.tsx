@@ -1,24 +1,13 @@
-import { CSSProperties } from 'react';
+import FlexBox from '@/components/FlexBox';
 
 function App() {
   /**
    * Remove code below
    */
-  const style: CSSProperties = {
-    width: '100vw',
-    height: '100vh',
-    display: 'flex',
-    flex: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-    flexDirection: 'column',
-    backgroundColor: '#2d2d2d',
-    color: 'white',
-  };
   return (
-    <div style={style}>
+    <FlexBox>
       <h1>{`<React App Template />`}</h1>
-    </div>
+    </FlexBox>
   );
 }
 
