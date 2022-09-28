@@ -3,12 +3,8 @@
 ## Get Started
 
 ```sh
-git clone https://github.com/zmzhoi/react-app-template.git my-project
-cd my-project
-rm -rf .git
-git init
-git add . && git commit -m 'Initial commit'
-npm install
+npx @zmzhoi/create-react-app example
+cd example
 npm start
 ```
 
