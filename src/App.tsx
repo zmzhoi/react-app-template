@@ -1,13 +1,13 @@
-import FlexBox from '@/components/FlexBox';
+import Layout from '@/components/Layout';
 
 function App() {
   /**
    * Remove code below
    */
   return (
-    <FlexBox>
+    <Layout>
       <h1>{`<React App Template />`}</h1>
-    </FlexBox>
+    </Layout>
   );
 }
 

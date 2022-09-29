@@ -4,7 +4,7 @@ interface Props {
   children: React.ReactNode;
 }
 
-function FlexBox({ children }: Props) {
+function Layout({ children }: Props) {
   const style: CSSProperties = {
     width: '100vw',
     height: '100vh',
@@ -20,4 +20,4 @@ function FlexBox({ children }: Props) {
   return <div style={style}>{children}</div>;
 }
 
-export default FlexBox;
+export default Layout;
