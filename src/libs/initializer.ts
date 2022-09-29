@@ -3,7 +3,7 @@
  */
 
 // #1. Style normalizing.
-import '../styles/sanitize.css';
+import '@/styles/sanitize.css';
 
 // #2. Do initialze other.
 // ...
