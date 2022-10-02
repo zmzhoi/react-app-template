@@ -10,6 +10,7 @@ const PostcssNormalize = require('postcss-normalize');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 
 const paths = require('./paths');
 const { createClientEnv } = require('../env');
@@ -166,6 +167,16 @@ module.exports = function (env) {
     );
     webpackConfig.optimization.minimizer.push(new CssMinimizerPlugin());
 
+    // Set terser-webpack-plugin
+    webpackConfig.plugins.push(
+      new TerserPlugin({
+        terserOptions: {
+          compress: {
+            drop_console: true, // drop console.log()
+          },
+        },
+      }),
+    );
     // others..
   }
 
