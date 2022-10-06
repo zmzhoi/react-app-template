@@ -3,7 +3,7 @@
 ## Get Started
 
 ```sh
-npx @zmzhoi/create-react-app example
+npx @zmzhoi/create-react-app@latest example
 cd example
 npm start
 ```
