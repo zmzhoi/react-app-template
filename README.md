@@ -119,14 +119,15 @@ npm run format:fix
 
 ## Environment variables
 
-|    환경 변수     |                                                                      기본 값                                                                      | 커스텀 가능 여부 |                        설명                        |
+아래는 빌드시에 필요한 환경변수입니다. 커스텀을 할 때에는 script를 수정하시면 됩니다.
+| 환경 변수 | 기본 값 | 커스텀 가능 여부 | 설명 |
 | :--------------: | :-----------------------------------------------------------------------------------------------------------------------------------------------: | :--------------: | :------------------------------------------------: |
-|   **NODE_ENV**   | <table><thead><tr><th>start.js</th><th>build.js</th></tr></thead><tbody><tr><td>`'development'`</td><td>`'production'`</td></tr></tbody> </table> |        ✅        |                         -                          |
-| **WEBPACK_ENV**  | <table><thead><tr><th>start.js</th><th>build.js</th></tr></thead><tbody><tr><td>`'development'`</td><td>`'production'`</td></tr></tbody> </table> |        ✅        |                   웹팩 빌드 mode                   |
-|    **DEPLOY**    |       <table><thead><tr><th>start.js</th><th>build.js</th></tr></thead><tbody><tr><td>`'false'`</td><td>`'true'`</td></tr></tbody> </table>       |        ❌        |           build.js 실행 여부 (배포 여부)           |
-|  **PUBLIC_URL**  |                                                                       `''`                                                                        |        ✅        |                         -                          |
-| **OPEN_BROWSER** |                                                                      `true`                                                                       |        ✅        | start.js 스크립트 실행 시 브라우저를 자동으로 실행 |
-|     **PORT**     |                                                                      `3000`                                                                       |        ✅        |              웹팩 개발 서버 포트 번호              |
+| **NODE_ENV** | <table><thead><tr><th>start.js</th><th>build.js</th></tr></thead><tbody><tr><td>`'development'`</td><td>`'production'`</td></tr></tbody> </table> | ✅ | - |
+| **WEBPACK_ENV** | <table><thead><tr><th>start.js</th><th>build.js</th></tr></thead><tbody><tr><td>`'development'`</td><td>`'production'`</td></tr></tbody> </table> | ✅ | 웹팩 빌드 mode |
+| **DEPLOY** | <table><thead><tr><th>start.js</th><th>build.js</th></tr></thead><tbody><tr><td>`'false'`</td><td>`'true'`</td></tr></tbody> </table> | ❌ | build.js 실행 여부 (배포 여부) |
+| **PUBLIC_URL** | `''` | ✅ | - |
+| **OPEN_BROWSER** | `true` | ✅ | start.js 스크립트 실행 시 브라우저를 자동으로 실행 |
+| **PORT** | `3000` | ✅ | 웹팩 개발 서버 포트 번호 |
 
 ## Polyfill
 
