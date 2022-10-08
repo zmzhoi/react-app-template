@@ -3,7 +3,7 @@
  *                     Requires
  * ==================================================
  */
-require('./env').init('production');
+require('./env').init('build');
 
 const webpack = require('webpack');
 
@@ -18,9 +18,10 @@ const createWebpackConfig = require('./configs/webpack.config');
 let compiler;
 let webpackConfig;
 const logger = console;
+const webpackEnv = process.env.WEBPACK_ENV;
 try {
   logger.log(`Configuring...(1/2)`);
-  webpackConfig = createWebpackConfig(process.env.NODE_ENV);
+  webpackConfig = createWebpackConfig(webpackEnv);
   compiler = webpack(webpackConfig);
 } catch (error) {
   logger.log(`(❗️) Failed to configure. (❗️)`);

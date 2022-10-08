@@ -3,7 +3,7 @@
  *                     Requires
  * ==================================================
  */
-require('./env').init('development');
+require('./env').init('start');
 
 const webpack = require('webpack');
 const webpackDevServer = require('webpack-dev-server');
@@ -22,9 +22,10 @@ let webpackDevServerConfig;
 let compiler;
 let server;
 const logger = console;
+const webpackEnv = process.env.WEBPACK_ENV;
 try {
   logger.log(`Configuring...`);
-  webpackConfig = createWebpackConfig(process.env.NODE_ENV);
+  webpackConfig = createWebpackConfig(webpackEnv);
   webpackDevServerConfig = createWebpackDevServerConfig();
   compiler = webpack(webpackConfig);
   server = new webpackDevServer(webpackDevServerConfig, compiler);

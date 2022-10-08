@@ -34,6 +34,15 @@ app을 시작합니다.
 npm start
 ```
 
+start 스크립트는 기본적으로 `development mode` 빌드를 진행합니다. start 스크립트에서 `produnction mode` 빌드를 원하시면 아래와 같이 script를 수정해주세요.
+> 사용하는 PC가 MacOS가 아니라면 [여기](https://github.com/kentcdodds/cross-env)를 참고해주세요.
+```
+"scripts": {
+  "start": "WEBPACK_ENV=production node scripts/start.js",
+  ...
+}
+```
+
 **`build`**
 
 app을 빌드합니다.
@@ -42,6 +51,15 @@ app을 빌드합니다.
 
 ```
 npm run build
+```
+
+build 스크립트는 기본적으로 `production mode` 빌드를 진행합니다. build 스크립트에서 `development mode` 빌드를 원하시면 아래와 같이 script를 수정해주세요.
+> 사용하는 PC가 MacOS가 아니라면 [여기](https://github.com/kentcdodds/cross-env)를 참고해주세요.
+```
+"scripts": {
+  "build": "WEBPACK_ENV=development node scripts/build.js",
+  ...
+}
 ```
 
 **`test`**
@@ -81,6 +99,16 @@ npm run format
 ```
 npm run format:fix
 ```
+
+## Dotenv
+
+아래는 적용 우선 순위대로 정렬된 dotenv 파일 유효 리스트 입니다.
+- `.env.development`, `.env.production` ( .env.{process.env.NODE_ENV} )
+- `.env`
+
+기본적으로는 `.env` 파일을 프로젝트 루트에 생성하여 사용하면 됩니다. 만약, development mode 와 production mode 에서 사용하는 환경변수 값이 다르다면 `.env.development` 파일과 `.env.production` 파일을 프로젝트 루트에 생성하여 사용해주세요.
+> NODE_ENV 값은 start 스크립트에서는 development, build 스크립트에서는 production 값이 기본 값입니다. NODE_ENV 값 커스텀을 원하시면 package.json 파일에서 scripts를 수정해주세요.
+
 
 ## Polyfill
 
