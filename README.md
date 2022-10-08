@@ -117,6 +117,17 @@ npm run format:fix
 
 > NODE_ENV 값은 start 스크립트에서는 development, build 스크립트에서는 production 값이 기본 값입니다. NODE_ENV 값 커스텀을 원하시면 package.json 파일에서 scripts를 수정해주세요.
 
+## Environment variables
+
+|    환경 변수     |                                                                      기본 값                                                                      | 커스텀 가능 여부 |                        설명                        |
+| :--------------: | :-----------------------------------------------------------------------------------------------------------------------------------------------: | :--------------: | :------------------------------------------------: |
+|   **NODE_ENV**   | <table><thead><tr><th>start.js</th><th>build.js</th></tr></thead><tbody><tr><td>`'development'`</td><td>`'production'`</td></tr></tbody> </table> |        ✅        |                         -                          |
+| **WEBPACK_ENV**  | <table><thead><tr><th>start.js</th><th>build.js</th></tr></thead><tbody><tr><td>`'development'`</td><td>`'production'`</td></tr></tbody> </table> |        ✅        |                   웹팩 빌드 mode                   |
+|    **DEPLOY**    |       <table><thead><tr><th>start.js</th><th>build.js</th></tr></thead><tbody><tr><td>`'false'`</td><td>`'true'`</td></tr></tbody> </table>       |        ❌        |           build.js 실행 여부 (배포 여부)           |
+|  **PUBLIC_URL**  |                                                                       `''`                                                                        |        ✅        |                         -                          |
+| **OPEN_BROWSER** |                                                                      `true`                                                                       |        ✅        | start.js 스크립트 실행 시 브라우저를 자동으로 실행 |
+|     **PORT**     |                                                                      `3000`                                                                       |        ✅        |              웹팩 개발 서버 포트 번호              |
+
 ## Polyfill
 
 폴리필을 삽입하시려면 먼저 `core-js`를 설치하고:
