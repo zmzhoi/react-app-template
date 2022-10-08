@@ -1,14 +1,12 @@
 import Layout from '@/components/Layout';
 
+import pkg from '../package.json';
+
 function App() {
   /**
    * Remove code below
    */
-  return (
-    <Layout>
-      <h1>{`<React App Template />`}</h1>
-    </Layout>
-  );
+  return <Layout>{`<${pkg.name} />`}</Layout>;
 }
 
 export default App;

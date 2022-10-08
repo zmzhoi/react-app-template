@@ -15,6 +15,8 @@ function Layout({ children }: Props) {
     flexDirection: 'column',
     backgroundColor: '#2d2d2d',
     color: 'white',
+    fontWeight: 100,
+    fontSize: '3rem',
   };
 
   return <div style={style}>{children}</div>;
