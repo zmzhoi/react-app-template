@@ -114,7 +114,7 @@ module.exports = function (env) {
       }),
       new ESLintPlugin({
         extensions,
-        failOnWarning: true,
+        failOnWarning: process.env.DEPLOY === 'true', // On deploy, Even a eslint warning will throw an error.
         cache: true,
         cacheLocation: path.resolve(paths.nodeModules, '.cache/.eslintcache'),
       }),
